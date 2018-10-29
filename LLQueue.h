@@ -23,8 +23,8 @@ public:
 
 private:
   DoubleLL<T> myQueue;
-  ListNode<T>* frontM;
-  ListNode<T>* rearM;
+  int frontM;
+  int rearM;
   unsigned int numElements;
 };
 
@@ -32,8 +32,8 @@ private:
 template <class T>
 Queue<T>::Queue()
 {
-  //frontM = myQueue.getFront();
-//  rearM = myQueue.getBack();
+  frontM = 0;
+  rearM = -1;
   numElements = 0;
 }
 
@@ -41,10 +41,8 @@ Queue<T>::Queue()
 template <class T>
 Queue<T>::~Queue()
 {
-  while (!isEmpty())
-  {
-    myQueue.removeFront();
-  }
+  //No memory allocated in Queue header,
+  //DLL destructor takes care of nodes in list
 
   cout << "Queue Destroyed" << endl;
 }
@@ -54,7 +52,7 @@ template <class T>
 void Queue<T>::enque(T data)
 {
   myQueue.insertFront(data);
-  //frontM = frontM -> next;
+  rearM++;
   numElements++;
 }
 
@@ -69,6 +67,8 @@ bool Queue<T>::deque()
   }
 
   myQueue.removeBack();
+  frontM++;
+  rearM--;
   numElements--;
   return true;
 }
@@ -80,10 +80,10 @@ T Queue<T>::front()
   if (isEmpty())
   {
     cout << "Queue is empty" << endl;
-    return;
+    exit(0);
   }
-
-  return frontM -> data;
+  T result = myQueue.getPosData(rearM);
+  return result;
 
 }
 

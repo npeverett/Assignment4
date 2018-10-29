@@ -62,11 +62,11 @@ public:
 
   //Other
   int find(T value);
+  T getPosData(int pos);
   unsigned int size();
   void printList();
 
-  ListNode<T>* getFront();
-  ListNode<T>* getBack();
+
 private:
   ListNode<T>* front;
   ListNode<T>* back;
@@ -307,6 +307,33 @@ int DoubleLL<T>::find(T value)
   return idx;
 }
 
+//Method to get data at a position
+template <class T>
+T DoubleLL<T>::getPosData(int pos)
+{
+  if (ListSize == 0)
+  {
+    cout << "List is empty." << endl;
+    exit(0);
+  }
+
+  int idx = 0;
+  ListNode<T>* curr = front;
+  while (idx != pos)
+  {
+    curr = curr -> next;
+    idx++;
+
+    if (curr == NULL)
+    {
+      cout << "No node exists at given position." << endl;
+      exit(0);
+    }
+  }
+
+  return curr -> data;
+}
+
 //Method to get number of nodes in list
 template <class T>
 unsigned int DoubleLL<T>::size()
@@ -335,15 +362,5 @@ void DoubleLL<T>::printList()
   }
 }
 
-template <class T>
-ListNode<T>* DoubleLL<T>::getFront()
-{
-  return front;
-}
 
-template <class T>
-ListNode<T>* DoubleLL<T>::getBack()
-{
-  return back;
-}
 #endif

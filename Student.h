@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 
 using namespace std;
@@ -13,19 +14,3 @@ private:
   int arriveTime;
   int waitTime;
 };
-
-Student::Student()
-{
-
-}
-
-Student::Student(int arrivePos, int wait)
-{
-  arriveTime = arrivePos;
-  waitTime = wait;
-}
-
-Student::~Student()
-{
-
-}
