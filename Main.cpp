@@ -3,14 +3,15 @@
 #include "LLQueue.h"
 #include "Student.h"
 #include "FileReader.h"
+#include "Window.h"
+#include "Simulation.h"
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
-  int clockTimer = 0;
-  Queue<int> myLLQueue;
   FileReader fr;
+  Simulation sim;
 
   //If User Does Not Provide A File Name In Argument
   if (argv[1] == NULL)
@@ -26,5 +27,11 @@ int main(int argc, char **argv)
     return 1;
   }
 
+  fr.readFile(argv[1]);
+  sim.beginSimulation(fr.getTotalNumStudents(), fr.getStudentQueue(), fr.getOpenWindows());
+
   return 1;
 }
+
+//NEED TO CHECK ABOUT STUDENT TIMES LEAVING ARRAY, FINISHTIME != TIME THEY LEAVE
+//NEED TO GET SUMMARY STATISTICS

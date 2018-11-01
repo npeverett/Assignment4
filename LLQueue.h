@@ -3,6 +3,7 @@
 #define QUEUE_H
 #include <iostream>
 #include "DLL.h"
+#include "Student.h"
 
 using namespace std;
 
@@ -12,17 +13,17 @@ class Queue{
 public:
   Queue();
   ~Queue();
+  Queue(const Queue& obj);
 
   void enque(T);
-  bool deque();
+  T deque();
   T front();
   unsigned int size();
 
-  bool isFull();
   bool isEmpty();
 
 private:
-  DoubleLL<T> myQueue;
+  DoubleLL<Student> myQueue;
   int frontM;
   int rearM;
   unsigned int numElements;
@@ -31,6 +32,14 @@ private:
 //Class Constructor
 template <class T>
 Queue<T>::Queue()
+{
+  frontM = 0;
+  rearM = -1;
+  numElements = 0;
+}
+
+template <class T>
+Queue<T>::Queue(const Queue& obj)
 {
   frontM = 0;
   rearM = -1;
@@ -58,19 +67,19 @@ void Queue<T>::enque(T data)
 
 //Method to remove data from queue
 template <class T>
-bool Queue<T>::deque()
+T Queue<T>::deque()
 {
   if (isEmpty())
   {
     cout << "Queue is empty" << endl;
-    return false;
+    exit(0);
   }
 
-  myQueue.removeBack();
+  T temp = myQueue.removeBack();
   frontM++;
   rearM--;
   numElements--;
-  return true;
+  return temp;
 }
 
 //Method to get data at front of queue

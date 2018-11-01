@@ -7,10 +7,16 @@ class Student
 {
 public:
   Student();
-  Student(int arrivePos, int wait);
+  Student(string arrivePos, string wait, int finish);
   ~Student();
 
+  int getStudentArrival();
+  int getStudentWait();
+  int getFinishTime();
+  string arriveTime;
+  int finishTime;
 private:
-  int arriveTime;
-  int waitTime;
+
+  string waitTime;
+
 };

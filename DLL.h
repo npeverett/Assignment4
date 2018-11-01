@@ -56,7 +56,7 @@ public:
 
   //Delete/Remove
   bool removeFront();
-  bool removeBack();
+  T removeBack();
   bool remove(T key);
   bool deletePosition(int pos);
 
@@ -165,12 +165,12 @@ bool DoubleLL<T>::removeFront()
 
 //Method to remove a node at back of list
 template <class T>
-bool DoubleLL<T>::removeBack()
+T DoubleLL<T>::removeBack()
 {
   if (ListSize == 0)
   {
     cout << "List is empty." << endl;
-    return false;
+    exit(0);
   }
 
   ListNode<T>* temp = back;
@@ -185,11 +185,9 @@ bool DoubleLL<T>::removeBack()
   }
 
   back = back -> prev;
-  temp -> prev = NULL;
 
-  delete temp;
   ListSize--;
-  return true;
+  return temp -> data;
 }
 
 //Method to remove a node given the data point
