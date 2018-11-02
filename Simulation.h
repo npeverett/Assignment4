@@ -14,11 +14,21 @@ public:
 
   void beginSimulation(int numStuds, Queue<Student>* queue, int arraySize);
 
-  int getMeanStudentWait(int studentWait);
+  void addTotalWait(int studentWait);
+  float getMeanWaitTime(int numStudents);
+  int getMedianWaitTime(int numStudents);
+  int getLongestWaitTime();
+  void addWaitOverTen(int count);
+  int getStudentWaitOverTen();
+  int getMeanWindowIdle();
+  int getLongestIdleTime();
+  int getIdleWindowOverFive();
+
 
 private:
   int clock;
-  int totalWaitTime;
+  float totalWaitTime;
+  int numOverTen;
   int numStud;
   Queue<Student>* studentQueue;
 };

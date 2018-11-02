@@ -11,17 +11,20 @@ public:
   Window(int maxSize);
   ~Window();
   Window(const Window& obj);
-
   void initializeWindow();
+
   void insertStudent(Student* st);
   void removeStudent(Student* st);
   bool studentExpire(int time);
-  bool isFull();
-  bool isEmpty();
 
-  void getNumElements();
+  int getNumElements();
+  int getNumWindows();
+  float getTimeIdle();
+  void incTimeIdle();
+
 private:
   Student** windows;
   int numWindows;
+  int idleCount;
   bool isAvailable;
 };

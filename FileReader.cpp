@@ -70,7 +70,6 @@ void FileReader::readFile(string filename)
       queue -> enque(newStudent);
       totalStudents++;
 
-      cout << "Student: " << arrivalTime << "," << timeNeeded << endl;
     }
   }
 }

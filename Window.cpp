@@ -49,19 +49,17 @@ void Window::initializeWindow()
 //Method to add new student to the window
 void Window::insertStudent(Student* st)
 {
-  if (!isFull())
+  for (int i = 0; i < numWindows; ++i)
   {
-    for (int i = 0; i < numWindows; ++i)
+    if (windows[i] == NULL)
     {
-      if (windows[i] == NULL)
-      {
-        windows[i] = st;
-        cout << "Student arrived at: " << windows[i] -> arriveTime << endl;
-        break;
-      }
+      Student* newStudent = new Student(st);
+      windows[i] = newStudent;
+      break;
     }
   }
 }
+
 
 //Method to remove student when time has expired
 void Window::removeStudent(Student* st)
@@ -70,8 +68,10 @@ void Window::removeStudent(Student* st)
   {
     if (windows[i] == st)
     {
+      cout << "Student who began at time " << windows[i] -> arriveTime;
       windows[i] = NULL;
-      break;
+      cout << " has become NULL";
+      return;
     }
   }
 }
@@ -84,59 +84,49 @@ bool Window::studentExpire(int time)
   {
     if (windows[i] != NULL)
     {
-      if (windows[i] -> finishTime == time)
+      if (time == windows[i] -> finishTime)
       {
-        cout << "Student left at: " << time << endl;
         removeStudent(windows[i]);
-        return true;
+        cout << " at time " << time << '\n' << endl;
       }
     }
   }
   return false;
 }
 
-
-void Window::getNumElements()
+//Method to get the number of elements in the array
+int Window::getNumElements()
 {
   int count = 0;
-  if (!isEmpty())
-  {
-    for (int i = 0; i < numWindows; ++i)
-    {
-      if (windows[i] != NULL)
-      {
-        count++;
-      }
-    }
-  }
-}
-
-
-//Method to check if any windows are open for students
-bool Window::isFull()
-{
-
-  for (int i = 0; i < numWindows; ++i)
-  {
-    if (windows[i] == NULL)
-    {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-//Method to check if all windows are available
-bool Window::isEmpty()
-{
   for (int i = 0; i < numWindows; ++i)
   {
     if (windows[i] != NULL)
     {
-      return false;
+      count++;
     }
   }
 
-  return true;
+  return count;
+}
+
+//Method to get size of array
+int Window::getNumWindows()
+{
+  return numWindows;
+}
+
+void Window::incTimeIdle()
+{
+  for (int i = 0; i < numWindows; ++i)
+  {
+    if (windows[i] == NULL)
+    {
+      idleCount++;
+    }
+  }
+}
+
+float Window::getTimeIdle()
+{
+  return float(idleCount) / float(numWindows);
 }
